@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Motion from "@/components/Motion";
 import StackMark from "@/components/StackMark";
 const display = Bricolage_Grotesque({ subsets: ["latin"], axes: ["opsz", "wdth"], variable: "--f-display" });
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <p className="foot-fine mono">© 2026 Short Stack Daily · Free, daily, unsubscribe anytime · Sponsors: reply to any issue</p>
       </footer>
       <Motion />
+      <Analytics />
     </body>
   </html>);
 }

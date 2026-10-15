@@ -23,3 +23,12 @@ export async function sendConfirmEmail(email: string, url: string) {
   });
   if (!r.ok) throw new Error(`Resend email error ${r.status}`);
 }
+
+// Best-effort owner alert. Never throws.
+export async function sendAlert(subject: string) {
+  try {
+    const to = process.env.ALERT_EMAIL || "jer.hndz@gmail.com";
+    const r = await call("/emails", "POST", { from: env("FROM_EMAIL"), to, subject, text: subject });
+    if (!r.ok) console.error(`Alert email failed ${r.status}`);
+  } catch (e) { console.error("Alert email error", e); }
+}

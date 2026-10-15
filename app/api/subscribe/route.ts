@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { addPendingContact, sendConfirmEmail } from "@/lib/resend";
+import { addPendingContact, sendConfirmEmail, sendAlert } from "@/lib/resend";
 import { sign } from "@/lib/token";
 export async function POST(req: Request) {
   let email = "";
@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Please enter a valid email." }, { status: 400 });
   try {
     await addPendingContact(email);
+    await sendAlert(`New Short Stack signup: ${email} (pending confirm)`);
     const site = process.env.SITE_URL ?? new URL(req.url).origin;
     await sendConfirmEmail(email, `${site}/api/confirm?token=${encodeURIComponent(sign(email))}`);
     return NextResponse.json({ ok: true });
