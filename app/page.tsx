@@ -40,9 +40,9 @@ export default function Home() {
           <span className="line" style={{ ["--l" as string]: 1 }}><span>One for each</span></span>
           <span className="line last" style={{ ["--l" as string]: 2 }}><span><i className="serif squig">kind of builder.<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden><path pathLength={1} d="M3 15C40 5 70 5 104 13s68 9 100-1 62-7 93 2" /></svg></i></span></span>
         </h1>
-        <p className="sub fade-up" style={{ ["--delay" as string]: "550ms" }}>Each one comes with a <mark>try-it-in-10-minutes</mark> step. Skip the news firehose and get something you can actually try before your coffee&apos;s cold.</p>
+        <p className="sub fade-up" style={{ ["--delay" as string]: "550ms" }}>Each one comes with a <mark>try-it-in-10-minutes</mark> step. Skip the news firehose and get something you can actually try before your coffee&apos;s cold. <strong>Get 50 vibe-coding prompts free</strong> when you join.</p>
         <div id="subscribe" className="fade-up" style={{ ["--delay" as string]: "700ms" }}><SignupForm /></div>
-        <p className="fine mono fade-up" style={{ ["--delay" as string]: "820ms" }}><span>Free</span><span>3-minute read</span><span>No spam, double opt-in</span></p>
+        <p className="fine mono fade-up" style={{ ["--delay" as string]: "820ms" }}><span><a href="/prompts" className="ul">Get 50 vibe-coding prompts free</a></span><span>Free</span><span>3-minute read</span><span>No spam, double opt-in</span></p>
       </div>
       {latest && <HeroStack issue={latest} />}
     </section>

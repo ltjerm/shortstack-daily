@@ -291,3 +291,22 @@ a:hover .arr,button:hover .arr{transform:translateX(4px)}
   html{scroll-behavior:auto}
   .js [data-reveal],.js .how li{opacity:1;translate:none}
 }
+/* growth: share, forward, prompts, faq, tools */
+.share{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0}
+.share-l{opacity:.7;margin-right:4px}
+.btn-alt{background:var(--paper);color:var(--ink)}
+.forward{margin:36px 0;padding:28px;border:2px solid var(--ink);border-radius:20px;background:var(--cobalt);color:var(--cream);box-shadow:8px 8px 0 var(--ink)}
+.forward h3{font:800 1.6rem/1.1 var(--f-d);margin:.3em 0}.forward p{margin-bottom:16px}
+.forward .btn{background:var(--ink)}
+.page .cta{margin-top:48px;text-align:center}.page .cta h2{font:800 2rem/1.1 var(--f-d);margin-bottom:18px}.page .cta .signup{margin:0 auto}
+.gate{margin:28px 0;padding:28px;border:2px solid var(--ink);border-radius:20px;background:var(--paper);box-shadow:8px 8px 0 var(--cobalt)}
+.gate h2{font:800 1.8rem/1.1 var(--f-d);margin-bottom:8px}.gate p{margin-bottom:16px}
+.p-sec{margin-top:48px}.p-sec>h2,.h-sm{font:800 2rem/1.1 var(--f-d);margin:40px 0 6px}
+.p-list,.tools{list-style:none;padding:0;display:grid;gap:16px;margin-top:18px}
+.p-list li,.tools li{padding:20px 22px;border:2px solid var(--ink);border-radius:16px;background:var(--paper)}
+.p-list h3,.tools h3{font:700 1.2rem/1.2 var(--f-d);margin-bottom:4px}
+.p-list blockquote{margin-top:10px;padding:12px 14px;border-left:4px solid var(--cobalt);background:var(--cream);font-size:.98rem}
+.tools p{margin-top:6px}
+.locked{margin-top:12px;opacity:.75}
+.faq{display:grid;gap:14px;margin-top:16px}.faq div{padding:18px 20px;border:2px solid var(--ink);border-radius:16px;background:var(--paper)}
+.faq dt{font:700 1.1rem/1.3 var(--f-d)}.faq dd{margin:6px 0 0}

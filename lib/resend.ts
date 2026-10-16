@@ -18,8 +18,8 @@ export async function confirmContact(email: string) {
 export async function sendConfirmEmail(email: string, url: string) {
   const r = await call("/emails", "POST", {
     from: env("FROM_EMAIL"), to: email, subject: "Confirm your Short Stack Daily subscription",
-    html: `<div style="font-family:system-ui;max-width:480px"><h2>One click and you're in.</h2><p>Confirm to get 5 AI picks a day, each with a 10-minute try-it step.</p><p><a href="${url}" style="background:#111;color:#d4ff3a;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600">Confirm subscription</a></p><p style="color:#888;font-size:12px">Didn't sign up? Ignore this email.</p></div>`,
-    text: `Confirm your Short Stack Daily subscription: ${url}`,
+    html: `<div style="font-family:system-ui;max-width:480px"><h2>One click and you're in.</h2><p>Confirm to get 5 AI picks a day, each with a 10-minute try-it step. Confirming also unlocks your free guide, <b>50 Prompts for Vibe Coders</b>.</p><p><a href="${url}" style="background:#111;color:#d4ff3a;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600">Confirm subscription</a></p><p>After you confirm, your guide is at <a href="https://shortstackdaily.com/prompts">shortstackdaily.com/prompts</a>.</p><p style="color:#888;font-size:12px">Didn't sign up? Ignore this email.</p></div>`,
+    text: `Confirm your Short Stack Daily subscription: ${url}\n\nConfirming unlocks 50 Prompts for Vibe Coders: https://shortstackdaily.com/prompts`,
   });
   if (!r.ok) throw new Error(`Resend email error ${r.status}`);
 }
