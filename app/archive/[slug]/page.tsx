@@ -31,10 +31,11 @@ export default async function IssuePage({ params }: { params: Promise<{ slug: st
   return (<main className="page">
     <JsonLd data={ld} />
     <a href="/archive" className="mono dim">← archive</a>
+    <section className="issue-top-cta"><p className="mono"><b>Get 5 AI picks like these every weekday at 7am MT.</b> Free, plus 50 vibe-coding prompts when you confirm.</p><SignupForm compact placement="issue_top" /></section>
     <ShareBar url={url} text={`${issue.title}: ${lead} (5 AI picks, each with a 10-minute try-it step) via @supjeremyyy`} />
     <IssueCard issue={issue} />
     <ShareBar url={url} text={`${issue.title}: ${lead} (5 AI picks, each with a 10-minute try-it step) via @supjeremyyy`} />
     <Forward url={url} />
-    <section className="cta"><h2>Get tomorrow&apos;s in your inbox.</h2><SignupForm compact /></section>
+    <section className="cta"><h2>Get tomorrow&apos;s in your inbox.</h2><SignupForm compact placement="issue_bottom" /></section>
   </main>);
 }

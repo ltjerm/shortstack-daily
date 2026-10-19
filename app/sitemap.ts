@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: SITE, lastModified: latest, changeFrequency: "daily", priority: 1 },
     { url: `${SITE}/archive`, lastModified: latest, changeFrequency: "daily", priority: 0.8 },
-    { url: `${SITE}/best-ai-coding-tools`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE}/best-ai-coding-tools`, lastModified: "2026-10-19", changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE}/prompts`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE}/about`, changeFrequency: "monthly", priority: 0.5 },
     ...issues.map(i => ({ url: `${SITE}/archive/${i.slug}`, lastModified: isoDate(i.date), changeFrequency: "yearly" as const, priority: 0.6 })),
