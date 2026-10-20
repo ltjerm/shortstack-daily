@@ -3,26 +3,12 @@ import IssueCard from "@/components/IssueCard";
 import HeroStack from "@/components/HeroStack";
 import Badge from "@/components/Badge";
 import { getIssues } from "@/lib/issues";
-const icons: Record<string, React.ReactNode> = {
-  code: <path d="M8 6 2 12l6 6M16 6l6 6-6 6" />,
-  loop: <path d="M20 12a8 8 0 1 1-2.3-5.7M20 3.5V8h-4.5" />,
-  pen: <><path d="m12 19 7-7 3 3-7 7-3-3z" /><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5zM2 2l7.6 7.6" /><circle cx="11" cy="11" r="2" /></>,
-  up: <path d="m22 6-8.5 8.5-5-5L2 16M16 6h6v6" />,
-  star: <path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1" />,
-};
-const readers = [
-  ["code", "Vibe coders", "Ship the side project tonight."],
-  ["loop", "Agent devs", "Tools, evals, and loops that work."],
-  ["pen", "Designers", "AI that respects your craft."],
-  ["up", "Founders", "No code required. Real leverage."],
-  ["star", "Wildcard", "The one everyone should see."],
-];
 const steps = [
   ["We read everything", "Lab blogs, changelogs, GitHub, HN, and X. Every link gets checked."],
   ["We pick five", "One per reader. Each one is real news with a source link."],
   ["You try one", "Every pick ends with a concrete step you can do in 10 minutes."],
 ];
-const tapeA = ["Vibe coders", "Agent devs", "Designers", "Founders", "Wildcard"];
+const tapeA = ["5 picks", "10-minute tries", "Every weekday", "7am MT", "Free"];
 const tapeB = ["Lab blogs", "Changelogs", "GitHub", "Hacker News", "X", "Every link checked"];
 const v = (n: number) => ({ ["--d" as string]: n });
 function Tape({ items, tone }: { items: string[]; tone: string }) {
@@ -49,23 +35,6 @@ export default function Home() {
 
     <div className="tapes" aria-hidden><Tape items={tapeB} tone="paper" /><Tape items={tapeA} tone="cobalt" /></div>
 
-    <section className="dark">
-      <div className="sec">
-        <div className="sec-head" data-reveal>
-          <p className="eyebrow mono">Who it&apos;s for</p>
-          <h2 className="h2">Five builders.<br /><i className="serif">One pick each.</i></h2>
-          <p className="lede">Every issue has exactly one pick for each of you. Read yours, skim the rest, try one before lunch.</p>
-        </div>
-        <div className="readers">
-          {readers.map(([ic, t, d], i) => (<div key={t} data-reveal style={v(i)}><a href="#subscribe" className="reader">
-            <span className="r-num mono">0{i + 1}</span>
-            <svg className="r-icon" viewBox="0 0 24 24" aria-hidden>{icons[ic]}</svg>
-            <h3>{t}</h3><p>{d}</p>
-            <span className="r-go mono">Get yours <span className="arr">→</span></span>
-          </a></div>))}
-        </div>
-      </div>
-    </section>
 
     <section className="sec">
       <div className="sec-head" data-reveal>

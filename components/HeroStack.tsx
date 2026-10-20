@@ -8,7 +8,7 @@ export default function HeroStack({ issue }: { issue: Issue }) {
     <ol className="stack" style={{ ["--n" as string]: issue.picks.length }} aria-label={`Picks in ${issue.title}`}>
       {issue.picks.map((p, i) => (<li key={p.n} className={`layer t-${tones[i % tones.length]}`} style={{ ["--i" as string]: i }}>
         <a href={`/archive/${issue.slug}#pick-${p.n}`}>
-          <span className="layer-top mono"><span>0{p.n} · {p.tag}</span><span className="arr">↗</span></span>
+          <span className="layer-top mono"><span>Pick 0{p.n}</span><span className="arr">↗</span></span>
           <span className="layer-title">{p.title}</span>
           {p.tryIt && <span className="layer-try"><span className="mono">⏱ 10-min try</span>{p.tryIt.replace(/`/g, "")}</span>}
         </a>

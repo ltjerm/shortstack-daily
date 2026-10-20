@@ -6,11 +6,12 @@ export default function IssueCard({ issue, limit }: { issue: Issue; limit?: numb
   return (<div className="issue">
     <div className="issue-head"><span className="dots" aria-hidden><i /><i /><i /></span><span className="mono">{issue.title}</span><span className="mono dim">{issue.date}</span></div>
     {picks.map(p => (<article key={p.n} id={`pick-${p.n}`} className="pick">
-      <div className={`pick-tag ${p.n % 2 ? "c" : "k"}`}><span className="n mono">0{p.n}</span> {p.tag}</div>
+      {p.image && <img className="pick-img" src={p.image} alt={p.alt} loading={p.n > 1 ? "lazy" : undefined} decoding="async" width={1200} height={675} />}
+      <div className={`pick-tag ${p.n % 2 ? "c" : "k"}`}><span className="n mono">0{p.n}</span></div>
       <h3>{p.title}</h3>
       <p>{md(p.body)}</p>
       {p.tryIt && <div className="try"><span className="mono">⏱ 10-MIN TRY</span><p>{md(p.tryIt)}</p></div>}
-      {p.source && <a className="src mono" href={p.source} target="_blank" rel="noreferrer">source ↗ {new URL(p.source).hostname.replace("www.","")}</a>}
+      {p.source && <p className="src">Source: <a href={p.source} target="_blank" rel="noreferrer">{new URL(p.source).hostname.replace(/^www\./, "")}</a></p>}
     </article>))}
     {limit && issue.picks.length > limit && <a className="fade mono" href={`/archive/${issue.slug}`}>+ {issue.picks.length - limit} more picks in the full issue <span className="arr">→</span></a>}
   </div>);

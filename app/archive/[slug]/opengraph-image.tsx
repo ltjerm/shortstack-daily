@@ -6,5 +6,5 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const i = getIssue((await params).slug);
   if (!i) return ogImage({ kicker: "", title: "Short Stack Daily", foot: "" });
   const p = i.picks[0];
-  return ogImage({ kicker: i.date, sub: `Issue #${i.number} · ${p?.tag ?? ""}`, title: p?.title ?? i.title, foot: `+ ${Math.max(i.picks.length - 1, 0)} more picks, each with a 10-min try` });
+  return ogImage({ kicker: i.date, sub: `Issue #${i.number}`, title: p?.title ?? i.title, foot: `+ ${Math.max(i.picks.length - 1, 0)} more picks, each with a 10-min try` });
 }

@@ -15,7 +15,7 @@ export function GET() {
 - [Archive](${SITE}/archive): Every issue
 
 ## Issues
-${issues.map(i => `- [${i.title} (${i.date})](${SITE}/archive/${i.slug}): ${i.picks.map(p => `${p.tag}: ${p.title}`).join("; ")}`).join("\n")}
+${issues.map(i => `- [${i.title} (${i.date})](${SITE}/archive/${i.slug}): ${i.picks.map(p => p.title).join("; ")}`).join("\n")}
 `;
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
 }

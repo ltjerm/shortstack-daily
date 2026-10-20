@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-export type Pick = { n: number; tag: string; emoji: string; title: string; body: string; tryIt: string; source: string };
+export type Pick = { n: number; tag: string; emoji: string; title: string; body: string; tryIt: string; source: string; image?: string; alt?: string };
 export type Issue = { slug: string; number: number; title: string; date: string; picks: Pick[] };
 const dir = path.join(process.cwd(), "content");
 export function getIssues(): Issue[] {
@@ -13,10 +13,12 @@ function parse(slug: string, md: string): Issue {
   const picks: Pick[] = [];
   for (const block of md.split(/^### /m).slice(1)) {
     const lines = block.trim().split("\n");
-    const m = lines[0].match(/^(\d+)\.\s+(\S+)\s+([^:]+):\s*(.+)$/);
+    // "### 1. Title", or the legacy "### 1. 🛠️ Vibe coders: Title" (tag is parsed but no longer shown).
+    const m = lines[0].match(/^(\d+)\.\s+(?:(\S+)\s+(Vibe coders|Agent devs|Designers|Founders|Non-technical founders|Wildcard):\s*)?(.+)$/);
     if (!m) continue;
+    const img = lines.slice(1).join("\n").match(/^Image:\s*(\S+)(?:\s*\|\s*(.+))?$/m);
     const rest = lines.slice(1).join("\n");
-    picks.push({ n: +m[1], emoji: m[2], tag: m[3].trim(), title: m[4].trim(),
+    picks.push({ n: +m[1], emoji: m[2] ?? "", tag: (m[3] ?? "").trim(), title: m[4].trim(), image: img?.[1], alt: img?.[2]?.trim() || m[4].trim(),
       body: rest.split(/\*\*Try this/)[0].trim(),
       tryIt: rest.match(/\*\*Try this in 10 min:\*\*\s*(.+)/)?.[1]?.trim() ?? "",
       source: rest.match(/Source:\s*(\S+)/)?.[1] ?? "" });

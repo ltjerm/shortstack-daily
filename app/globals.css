@@ -188,7 +188,8 @@ a:hover .arr,button:hover .arr{transform:translateX(4px)}
 .try{margin-top:18px;padding:14px 16px;border-left:4px solid var(--cobalt);border-radius:0 12px 12px 0;background:rgba(31,68,240,.08)}
 .try .mono{color:var(--cobalt);font-weight:700;font-size:.72rem;letter-spacing:.1em}
 .try p{margin-top:4px;color:var(--ink)}
-.src{display:inline-block;margin-top:14px;color:var(--muted);transition:color .25s}.src:hover{color:var(--cobalt)}
+.src{margin-top:14px;font-size:.8rem;color:var(--muted)}.pick .src{color:var(--muted)}.src a{color:inherit;text-decoration:underline;text-underline-offset:2px}.src a:hover{color:var(--cobalt)}
+.pick-img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:14px;border:2px solid var(--ink);margin-bottom:16px;background:var(--cream)}
 .fade{display:flex;justify-content:center;gap:8px;padding:18px;background:var(--cream-2);font-weight:600;transition:background .3s,color .3s}
 .fade:hover{background:var(--ink);color:var(--cream)}
 
