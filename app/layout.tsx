@@ -10,10 +10,10 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--f-mono" });
 export const metadata: Metadata = {
   metadataBase: new URL("https://shortstackdaily.com"),
   title: { default: "Short Stack Daily — 5 AI picks a day for builders", template: "%s | Short Stack Daily" },
-  description: "5 AI picks a day, one for each kind of builder, each with a try-it-in-10-minutes step. Free weekday email for vibe coders, agent devs, designers and founders.",
+  description: "5 AI picks a day for builders, each with a try-it-in-10-minutes step. Free weekday email covering new AI models, coding agents, tools and launches.",
   alternates: { canonical: "/", types: { "text/plain": "/llms.txt" } },
-  openGraph: { type: "website", siteName: "Short Stack Daily", url: "/", title: "Short Stack Daily — 5 AI picks a day for builders", description: "5 AI picks a day, one for each kind of builder, each with a try-it-in-10-minutes step." },
-  twitter: { card: "summary_large_image", creator: "@supjeremyyy", title: "Short Stack Daily — 5 AI picks a day for builders", description: "5 AI picks a day, one for each kind of builder, each with a try-it-in-10-minutes step." },
+  openGraph: { type: "website", siteName: "Short Stack Daily", url: "/", title: "Short Stack Daily — 5 AI picks a day for builders", description: "5 AI picks a day for builders, each with a try-it-in-10-minutes step." },
+  twitter: { card: "summary_large_image", creator: "@supjeremyyy", title: "Short Stack Daily — 5 AI picks a day for builders", description: "5 AI picks a day for builders, each with a try-it-in-10-minutes step." },
 };
 export const viewport: Viewport = { themeColor: "#F4EEDF" };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
