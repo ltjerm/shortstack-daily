@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <footer className="foot">
         <div className="foot-top">
           <p className="foot-tag">Five picks. Ten minutes.<br /><i className="serif">Every weekday.</i></p>
-          <div className="foot-links mono"><a href="/archive" className="ul">Archive</a><a href="/prompts" className="ul">50 prompts</a><a href="/best-ai-coding-tools" className="ul">Best AI coding tools</a><a href="/about" className="ul">About</a><a href="https://x.com/supjeremyyy" target="_blank" rel="noreferrer" className="ul">X / @supjeremyyy ↗</a><a href="/#subscribe" className="ul">Subscribe</a></div>
+          <div className="foot-links mono"><a href="/archive" className="ul">Archive</a><a href="/prompts" className="ul">50 prompts</a><a href="/best-ai-coding-tools" className="ul">Best AI coding tools</a><a href="/best-ai-agent-frameworks" className="ul">Best AI agent frameworks</a><a href="/about" className="ul">About</a><a href="https://x.com/supjeremyyy" target="_blank" rel="noreferrer" className="ul">X / @supjeremyyy ↗</a><a href="/#subscribe" className="ul">Subscribe</a></div>
         </div>
         <a href="/#subscribe" className="foot-mark" aria-label="Subscribe to Short Stack Daily">Short Stack</a>
         <p className="foot-fine mono">© 2026 Short Stack Daily · Free, daily, unsubscribe anytime · Sponsors: reply to any issue</p>

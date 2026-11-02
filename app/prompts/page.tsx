@@ -4,14 +4,14 @@ import { hasAccess } from "@/lib/access";
 import { SECTIONS } from "@/lib/prompts";
 import { SITE } from "@/lib/site";
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: "50 Prompts for Vibe Coders (free guide)", description: "50 copy-paste AI prompts for vibe coders, agent developers, designers and founders. Free with a Short Stack Daily subscription.", alternates: { canonical: `${SITE}/prompts` } };
+export const metadata: Metadata = { title: "50 Prompts for Vibe Coders (free guide)", description: "50 copy-paste AI prompts for building and shipping, agents, design and product work. Free with a Short Stack Daily subscription.", alternates: { canonical: `${SITE}/prompts` } };
 export default async function Prompts() {
   const ok = await hasAccess();
   let n = 0;
   return (<main className="page prompts">
     <p className="eyebrow mono">Free guide</p>
     <h1>50 Prompts for <i className="serif">Vibe Coders</i></h1>
-    <p className="sub">Copy-paste prompts for the 4 kinds of builders who read Short Stack: {SECTIONS.map(s => `${s.prompts.length} for ${s.tag.toLowerCase()}`).join(", ")}. Replace the [brackets] with your details.</p>
+    <p className="sub">Copy-paste prompts in 4 sections: {SECTIONS.map(s => `${s.prompts.length} for ${s.tag.toLowerCase()}`).join(", ")}. Replace the [brackets] with your details.</p>
     {!ok && <>
       <div className="gate">
         <h2>Unlock all 50 free</h2>

@@ -2,7 +2,7 @@ export type Prompt = { title: string; when: string; prompt: string };
 export type Section = { tag: string; intro: string; prompts: Prompt[] };
 // 50 prompts. Replace [brackets] with your details.
 export const SECTIONS: Section[] = [
-{ tag: "Vibe coders", intro: "Ship side projects faster without losing control of your codebase.", prompts: [
+{ tag: "Build and ship", intro: "Ship side projects faster without losing control of your codebase.", prompts: [
 { title: "Scope before code", when: "Starting any new feature", prompt: "Before writing code, restate what I'm asking for in 3 bullets, list the files you expect to touch, and ask me up to 3 questions about anything ambiguous. Feature: [describe it]." },
 { title: "One-evening MVP plan", when: "You have an idea and a free night", prompt: "I have about 4 hours. Cut [idea] down to the smallest version a stranger could use and give feedback on. List what's in, what's explicitly out, and the build order as checkpoints I can test one at a time." },
 { title: "Stack picker with tradeoffs", when: "Choosing a stack", prompt: "Recommend a stack for [app] built by one person who knows [languages]. Give 2 options with hosting, auth, database and rough monthly cost at 100 users. Pick one and say what would make you switch." },
@@ -19,7 +19,7 @@ export const SECTIONS: Section[] = [
 { title: "Refactor with a safety net", when: "A file got too big", prompt: "Propose how to split [file] into smaller modules. First list current behaviors and the tests that cover them, add any missing tests, then refactor in steps that each keep tests green." },
 { title: "Stuck-loop breaker", when: "The agent has tried the same fix 3 times", prompt: "Stop. Summarize what we've tried, why each attempt failed, and what assumption might be wrong. Suggest one completely different approach before writing any code." },
 ]},
-{ tag: "Agent devs", intro: "Design, debug and evaluate agents that do real work.", prompts: [
+{ tag: "Agents", intro: "Design, debug and evaluate agents that do real work.", prompts: [
 { title: "System prompt skeleton", when: "Starting a new agent", prompt: "Draft a system prompt for an agent that [job]. Include role, goal, tools and when to use each, hard rules, what to do when unsure, and the output format. Keep it under 400 words." },
 { title: "Tool schema review", when: "Defining tools", prompt: "Review these tool definitions [paste JSON]. Flag ambiguous names, missing parameter descriptions, parameters the model will likely hallucinate, and tools that overlap. Rewrite them to be unambiguous." },
 { title: "Failure-mode brainstorm", when: "Before launch", prompt: "List 15 ways an agent that [job] with tools [list] could fail: wrong tool, loops, prompt injection from tool output, partial completion, cost blowups. For each, give a guardrail or test." },
@@ -34,7 +34,7 @@ export const SECTIONS: Section[] = [
 { title: "MCP server design", when: "Exposing your product to agents", prompt: "Design an MCP server for [product]: the 5–8 tools an agent actually needs, their inputs and outputs, auth, and which actions should require user confirmation." },
 { title: "Postmortem writer", when: "After an agent incident", prompt: "Write a blameless postmortem from these notes [paste]: impact, timeline, root cause, why safeguards didn't catch it, and 3 action items with owners." },
 ]},
-{ tag: "Designers", intro: "Use AI for speed while keeping taste and craft in charge.", prompts: [
+{ tag: "Design", intro: "Use AI for speed while keeping taste and craft in charge.", prompts: [
 { title: "Brief to 3 directions", when: "Kicking off a project", prompt: "From this brief [paste], propose 3 distinct visual directions. For each: a one-line concept, palette with hex codes, type pairing, 3 reference adjectives, and what kind of brand it would be wrong for." },
 { title: "Critique like a senior designer", when: "Reviewing your own work", prompt: "Critique this screen [image] on hierarchy, spacing rhythm, contrast, alignment and copy. Rank issues by impact, be specific about pixels and elements, and skip generic praise." },
 { title: "Design tokens from a screenshot", when: "Systematizing a mockup", prompt: "Extract a token set from this design [image]: color roles (not just hex values), type scale, spacing scale and radii. Output as CSS variables and flag inconsistencies." },
@@ -47,7 +47,7 @@ export const SECTIONS: Section[] = [
 { title: "User-test script", when: "Validating a flow", prompt: "Write a 20-minute usability test script for [flow]: 1 warm-up question, 4 tasks phrased without leading words, follow-up probes, and what to watch for on each task." },
 { title: "Portfolio case study", when: "Writing up a project", prompt: "Turn these notes [paste] into a case study: problem, constraints, my role, 3 key decisions with alternatives I rejected, outcome with numbers if I have them, and what I'd do differently." },
 ]},
-{ tag: "Founders", intro: "Use AI for positioning, research and operations, no code required.", prompts: [
+{ tag: "Product and growth", intro: "Use AI for positioning, research and operations, no code required.", prompts: [
 { title: "Positioning in one line", when: "Your pitch is fuzzy", prompt: "Here's my product [describe] and target customer [describe]. Write 5 one-sentence positioning statements in the form 'For [who] who [pain], [product] is the [category] that [benefit], unlike [alternative].' Rank them and say why." },
 { title: "Competitor teardown", when: "Entering a market", prompt: "Compare my product with [competitors] on pricing, target customer, core promise, onboarding and what reviewers complain about. Cite sources for every claim and mark anything you couldn't verify." },
 { title: "Customer interview guide", when: "Talking to users", prompt: "Write a 30-minute customer discovery script for [audience] about [problem], following The Mom Test: past behavior only, no pitching, no hypotheticals. Include 3 questions that reveal willingness to pay." },
