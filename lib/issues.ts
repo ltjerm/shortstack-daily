@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 export type Pick = { n: number; tag: string; emoji: string; title: string; body: string; tryIt: string; source: string; image?: string; alt?: string };
-export type Issue = { slug: string; number: number; title: string; date: string; picks: Pick[] };
+export type Issue = { slug: string; number: number; title: string; date: string; picks: Pick[]; alsoNotable?: { text: string; url?: string } };
 const dir = path.join(process.cwd(), "content");
 export function getIssues(): Issue[] {
   return fs.readdirSync(dir).filter(f => f.endsWith(".md")).sort().reverse().map(f => parse(f.replace(/\.md$/, ""), fs.readFileSync(path.join(dir, f), "utf8")));
@@ -23,5 +23,9 @@ function parse(slug: string, md: string): Issue {
       tryIt: rest.match(/\*\*Try this in 10 min:\*\*\s*(.+)/)?.[1]?.trim() ?? "",
       source: rest.match(/Source:\s*(\S+)/)?.[1] ?? "" });
   }
-  return { slug, number: +(title.match(/#(\d+)/)?.[1] ?? 0), title, date, picks };
+  // "**Also notable:** text https://url" sits after the last pick (shown in the email; now on the site too).
+  const an = md.match(/^\*\*Also notable:\*\*\s*(.+)$/m)?.[1]?.trim();
+  const anUrl = an?.match(/(https?:\/\/\S+)\s*$/)?.[1];
+  const alsoNotable = an ? { text: (anUrl ? an.slice(0, an.length - anUrl.length) : an).trim(), url: anUrl } : undefined;
+  return { slug, number: +(title.match(/#(\d+)/)?.[1] ?? 0), title, date, picks, alsoNotable };
 }

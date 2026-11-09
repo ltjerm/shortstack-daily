@@ -13,6 +13,7 @@ export default function IssueCard({ issue, limit }: { issue: Issue; limit?: numb
       {p.tryIt && <div className="try"><span className="mono">⏱ 10-MIN TRY</span><p>{md(p.tryIt)}</p></div>}
       {p.source && <p className="src">Source: <a href={p.source} target="_blank" rel="noreferrer">{new URL(p.source).hostname.replace(/^www\./, "")}</a></p>}
     </article>))}
+    {!limit && issue.alsoNotable && <p className="also-notable"><strong>Also notable:</strong> {md(issue.alsoNotable.text)}{issue.alsoNotable.url && <>{" "}<a className="ul" href={issue.alsoNotable.url} target="_blank" rel="noreferrer">{new URL(issue.alsoNotable.url).hostname.replace(/^www\./, "")} ↗</a></>}</p>}
     {limit && issue.picks.length > limit && <a className="fade mono" href={`/archive/${issue.slug}`}>+ {issue.picks.length - limit} more picks in the full issue <span className="arr">→</span></a>}
   </div>);
 }

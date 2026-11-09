@@ -194,7 +194,7 @@ export default function Best() {
       </li>))}</ul></section>))}
     <section className="p-sec"><h2>Quick answers</h2>
       <dl className="faq">{faq.map(([q, a]) => (<div key={q}><dt>{q}</dt><dd>{a}</dd></div>))}</dl></section>
-    <p className="dim">Building agents rather than using coding agents? See <a className="ul" href="/best-ai-agent-frameworks">Best AI agent frameworks</a>.</p>
+    <p className="dim">Building agents rather than using coding agents? See <a className="ul" href="/best-ai-agent-frameworks">Best AI agent frameworks</a>. Adding tools to your coding agent? See <a className="ul" href="/best-mcp-servers">Best MCP servers for coding agents</a>.</p>
     <section className="cta"><h2>Get new tools every weekday.</h2><SignupForm compact placement="guide_coding_tools" /></section>
   </main>);
 }

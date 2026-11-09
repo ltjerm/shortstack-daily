@@ -329,3 +329,5 @@ a:hover .arr,button:hover .arr{transform:translateX(4px)}
 .cmp th{background:var(--ink);color:var(--cream);font:700 .76rem/1.2 var(--f-m);letter-spacing:.06em;text-transform:uppercase}
 .cmp tr:last-child td{border-bottom:0}
 @media (max-width:640px){.today-callout{margin-top:-24px;margin-bottom:48px}.today-card{padding:18px}}
+
+.also-notable{margin:18px 0 4px;padding:16px 20px;border:2px dashed var(--ink);border-radius:16px;background:var(--paper);font-size:.98rem;line-height:1.5}

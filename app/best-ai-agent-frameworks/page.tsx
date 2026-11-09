@@ -177,7 +177,7 @@ export default function Frameworks() {
 
     <section className="p-sec"><h2>Quick answers</h2>
       <dl className="faq">{faq.map(([q, a]) => (<div key={q}><dt>{q}</dt><dd>{a}</dd></div>))}</dl></section>
-    <p className="dim">Looking for coding agents like Claude Code, Cursor or Copilot instead? See <a className="ul" href="/best-ai-coding-tools">Best AI coding tools</a>.</p>
+    <p className="dim">Looking for coding agents like Claude Code, Cursor or Copilot instead? See <a className="ul" href="/best-ai-coding-tools">Best AI coding tools</a>. Want tools to plug into your agent? See <a className="ul" href="/best-mcp-servers">Best MCP servers for coding agents</a>.</p>
     <section className="cta"><h2>Get new agent tools every weekday.</h2><SignupForm compact placement="guide_agent_frameworks" /></section>
   </main>);
 }
