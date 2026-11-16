@@ -146,6 +146,11 @@ export default function Best() {
     <h1>Best AI <i className="serif">coding tools</i></h1>
     <p className="sub">Sourced comparison of the coding agents builders actually search—Claude Code, Cursor, GitHub Copilot, OpenAI Codex CLI and OpenCode—plus every coding model, agent tool and security advisory covered in Short Stack Daily. Vendor claims are labeled as vendor claims. No affiliate links.</p>
 
+    <section className="issue-top-cta">
+      <p>Get new coding tools in your inbox every weekday, free.</p>
+      <SignupForm compact placement="guide_coding_tools_top" />
+    </section>
+
     <section className="p-sec">
       <h2>Coding agents compared</h2>
       <p className="dim">Official pricing and capabilities as of Oct 26, 2026, with links to each vendor&apos;s docs and our issue coverage.</p>

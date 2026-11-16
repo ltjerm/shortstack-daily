@@ -145,6 +145,11 @@ export default function McpServers() {
     <h1>Best <i className="serif">MCP servers</i> for coding agents</h1>
     <p className="sub">Eleven MCP servers that give Claude Code, Cursor, Codex and other coding agents something they can&apos;t do on their own: GitHub, Context7, Playwright, Chrome DevTools, Serena, Sentry, Supabase, DBHub, Firecrawl, Figma and the Filesystem/Git reference servers. Licenses, versions and install lines checked against official repos and docs on Nov 9, 2026. No affiliate links.</p>
 
+    <section className="issue-top-cta">
+      <p>Get new MCP servers in your inbox every weekday, free.</p>
+      <SignupForm compact placement="guide_mcp_servers_top" />
+    </section>
+
     <section className="p-sec">
       <h2>Quick pick</h2>
       <ul className="tools">
