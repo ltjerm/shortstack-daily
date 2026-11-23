@@ -3,14 +3,22 @@ import JsonLd from "@/components/JsonLd";
 import SignupForm from "@/components/SignupForm";
 import { SITE } from "@/lib/site";
 
+const TITLE = "Best AI coding tools (Nov 23, 2026 update)";
+const DESC = "Sourced comparison of Claude Code, Cursor, GitHub Copilot, OpenAI Codex and OpenCode as of Nov 23, 2026: where each runs, current plans and prices from official pricing pages, latest CLI versions, plus the coding models, agent tools and security advisories covered in Short Stack Daily.";
+
 export const metadata: Metadata = {
-  title: "Best AI Coding Tools (October 2026): Claude Code, Cursor, Copilot, Codex, OpenCode & New Releases",
-  description: "Sourced comparison of Claude Code, Cursor, GitHub Copilot, OpenAI Codex CLI and OpenCode, plus the AI coding models, agents, app builders and security advisories covered in Short Stack Daily in October 2026.",
+  title: TITLE,
+  description: DESC,
   alternates: { canonical: `${SITE}/best-ai-coding-tools` },
+  openGraph: { title: TITLE, description: "Claude Code, Cursor, GitHub Copilot, OpenAI Codex and OpenCode compared from official pricing pages and package registries, checked Nov 23, 2026.", url: `${SITE}/best-ai-coding-tools`, type: "article", siteName: "Short Stack Daily", images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Short Stack Daily" }] },
+  twitter: { card: "summary_large_image", creator: "@supjeremyyy", title: TITLE, images: ["/opengraph-image"] },
 };
 
 type CoreTool = {
   name: string;
+  bestFor: string;
+  startsAt: string;
+  version: string;
   runsIn: string;
   models: string;
   pricing: string;
@@ -21,63 +29,97 @@ type CoreTool = {
   extraSource?: { label: string; url: string };
 };
 
+// Prices from each vendor's official pricing page; versions and licenses from npm and GitHub. All checked Nov 23, 2026.
 const compared: CoreTool[] = [
   {
     name: "Claude Code (Anthropic)",
-    runsIn: "Terminal CLI (macOS, Linux, Windows), VS Code, JetBrains, Claude desktop app, web and mobile",
-    models: "Anthropic Claude models (including Sonnet and Opus 5.5; Fast mode research preview on Opus 5.5 at $8/$40 per million tokens)",
-    pricing: "Included in paid Claude plans (Pro $20/mo monthly or $17/mo annual; Max from $100/mo), or pay-per-token via a Claude Console API account.",
-    notes: "Runs locally against your repo, asks permission before editing files or running commands, and connects to MCP servers. Automated Code Review reached general availability for Team and Enterprise on Oct 15, 2026; Anthropic says most reviews finish in 6–10 minutes, down from about 20 (vendor-reported).",
-    issue: "issue-003",
-    source: "https://claude.com/product/claude-code",
-    extraSource: { label: "Pricing ↗", url: "https://claude.com/pricing?mode=code" },
+    bestFor: "Long, multi-step agentic work from the terminal, IDE, desktop app or web",
+    startsAt: "Claude Pro, $17/mo annual or $20/mo monthly (not on Free)",
+    version: "@anthropic-ai/claude-code 2.1.330 (Nov 20, 2026)",
+    runsIn: "Terminal CLI (macOS, Linux, WSL, Windows), VS Code and Cursor extension, JetBrains plugin, Claude desktop app, web (claude.ai/code) and the Claude iOS/Android app",
+    models: "Anthropic's Claude models: Opus 5.5, Sonnet 5.5, Haiku 5.5 and Fable 5.2. Anthropic's pricing page lists Fable on Pro as paid with usage credits, and on Max and Ultra as included up to half of the weekly limit.",
+    pricing: "Claude Code is included on Pro ($17/mo with annual billing, $20 monthly), Max ($100/mo, 5× Pro usage), Ultra ($200/mo, 10× Pro weekly usage and no 5-hour limit for verified accounts), Team and Enterprise. Not on Free. You can also pay per token with an Anthropic Console API key.",
+    notes: "Reads your codebase, edits files, runs commands and opens pull requests. Supports CLAUDE.md (or an existing AGENTS.md), skills, hooks, MCP servers, subagents, cloud and desktop scheduled tasks, and GitHub Actions/GitLab CI. Security note (Issue #19): approving a command with “Yes, and don't ask again” can save it word-for-word, secrets included, in .claude/settings.local.json; add that file to each repo's .gitignore.",
+    issue: "issue-019",
+    anchor: "pick-1",
+    source: "https://code.claude.com/docs/en/overview",
+    extraSource: { label: "Pricing ↗", url: "https://claude.com/pricing" },
   },
   {
     name: "Cursor",
-    runsIn: "AI code editor (macOS, Windows, Linux), CLI, and remote Cloud Agents",
-    models: "Grok models included in plan usage; third-party models (Anthropic Claude, OpenAI, Google Gemini and others) available on Premium and above, billed separately by usage at API list price.",
-    pricing: "Individual plans: Free ($0/mo), Plus ($8/mo), Premium ($30/mo, 4× Plus usage plus Cloud Agents and AI code reviews), Super ($100/mo, 15× Plus), Ultra ($200/mo, 50× Plus).",
-    notes: "Combines local IDE editing and agent workflows with rules, skills, MCP servers, and background Cloud Agents that work on branches and open pull requests. Covered in Issue #1 (AMD Ross MCP integration) and Issue #6 (Asymptote Beacon session capture).",
+    bestFor: "An AI-first editor plus cloud agents that work on branches while you do something else",
+    startsAt: "Free; Plus $8/mo (Grok models only); Premium $30/mo",
+    version: "Editor and CLI auto-update; no public package version to pin",
+    runsIn: "AI code editor (macOS, Windows, Linux), CLI, and Cloud agents",
+    models: "Grok models are included in plan usage. Third-party models (Anthropic, OpenAI, Google and others) are available on Premium and above at API list price, billed separately by usage. Plus is Grok-only.",
+    pricing: "Individual: Free ($0, limited), Plus ($8/mo), Premium ($30/mo, 4× Plus usage), Super ($100/mo, 15× Plus), Ultra ($200/mo, 50× Plus). Teams from $30/user/mo; Enterprise custom.",
+    notes: "Premium and above add Cloud agents and automations, code hosting via Origin, AI code reviews via Bugbot, and third-party models at API list price. Teams plans add a team marketplace for internal rules, skills and plugins.",
     issue: "issue-006",
     source: "https://cursor.com/pricing",
-    extraSource: { label: "Docs ↗", url: "https://docs.cursor.com/account/pricing" },
   },
   {
     name: "GitHub Copilot",
-    runsIn: "VS Code, Visual Studio, JetBrains, Xcode, Neovim, GitHub.com, GitHub Mobile and CLI",
-    models: "Multi-model inline completions, next-edit suggestions, chat and coding agent billed through plan AI credits.",
-    pricing: "Copilot Free ($0/mo with limited monthly completions, chat and agent usage; free Pro for verified students and open-source maintainers), Pro ($10/mo), Pro+ ($39/mo), Max ($100/mo), and Business ($19/user/mo).",
-    notes: "Inline completions and next-edit suggestions do not consume AI credits on paid plans; usage beyond included AI credits is billed per token. Covered in Issue #1 (Canva AI Connector via MCP).",
-    issue: "issue-001",
-    anchor: "pick-3",
+    bestFor: "Teams that live on GitHub and want one assistant across many editors",
+    startsAt: "Free (2,000 completions/mo); Pro $10/mo",
+    version: "@github/copilot (Copilot CLI) 1.0.114 (Nov 18, 2026)",
+    runsIn: "GitHub.com and GitHub Mobile, VS Code, Visual Studio, JetBrains IDEs, Xcode, Neovim, Eclipse, Zed, Raycast, SQL Server Management Studio and the Copilot CLI",
+    models: "Model selection on paid plans; Pro+ adds premium models, including Anthropic's Opus. MAI Code 2 Flash is listed for every plan including Free (Issue #26).",
+    pricing: "Free ($0: 2,000 completions a month plus limited chat and agent use), Pro ($10/mo, $15 of GitHub AI Credits), Pro+ ($39/mo, $70 of credits), Max ($100/mo, $200 of credits). Business $19 and Enterprise $39 per seat per month. 1 credit = $0.01.",
+    notes: "Code completions and next-edit suggestions don't use credits and stay unlimited on paid plans; chat, agent mode, code review, Copilot in the cloud and the CLI draw down AI Credits. Pro and up can assign issues to Copilot to open a pull request and use third-party agents (Claude Code and Codex) inside Copilot.",
+    issue: "issue-026",
+    anchor: "pick-2",
     source: "https://github.com/features/copilot/plans",
-    extraSource: { label: "License docs ↗", url: "https://docs.github.com/en/billing/concepts/product-billing/github-copilot-licenses" },
+    extraSource: { label: "Plan docs ↗", url: "https://docs.github.com/en/copilot/get-started/plans" },
   },
   {
-    name: "OpenAI Codex CLI",
-    runsIn: "Terminal CLI, web, IDE extension, iOS, plus cloud tasks and GitHub code review",
-    models: "OpenAI coding models (including GPT-5.4, GPT-5.4-mini and GPT-5.3-Codex listed on OpenAI's Codex pricing documentation).",
-    pricing: "Included with ChatGPT Plus ($20/mo), Pro ($200/mo), Business ($30/user/mo), Edu and Enterprise, or pay-per-token using an OpenAI API key in the CLI, SDK or IDE.",
-    notes: "API-key usage runs locally in the CLI/IDE without cloud GitHub code review or Slack integrations. Covered in Issue #4 (DeepSeek server-side Search & Fetch tool support) and Issue #6 (Hystax Kompressor token-compression proxy benchmarked with Codex CLI).",
-    issue: "issue-006",
-    anchor: "pick-2",
+    name: "OpenAI Codex",
+    bestFor: "ChatGPT subscribers who want a local CLI plus cloud tasks and GitHub code review",
+    startsAt: "Free/Go (GPT-6 Luna in the desktop app, rolling out); Plus $20/mo",
+    version: "@openai/codex (Codex CLI, Apache-2.0) 0.171.0 (Nov 20, 2026)",
+    runsIn: "Codex desktop app, terminal CLI, IDE extension, web and iOS, plus cloud tasks, GitHub code review and Slack/Linear integrations",
+    models: "OpenAI models including GPT-6.2 Astra, GPT-6.2 Sol, GPT-6.1 Sol, GPT-6.1 Terra and GPT-6 Luna, per OpenAI's Codex pricing page. API-key sessions get whatever models your key can use.",
+    pricing: "Included in ChatGPT Free and Go (GPT-6 Luna in the desktop app, subject to rollout), Plus ($20/mo), Pro ($100, $200 or $500/mo; Pro has no 5-hour limit), Business, Edu and Enterprise. Or pay API prices with an API key (CLI, SDK and IDE only; no cloud features). GPT-6.2 Sol via usage-based billing: $2/$0.10/$10 per million input/cached/output tokens.",
+    notes: "API-key mode suits CI but has no GitHub code review or Slack. Plus gets an estimated 17–180 local GPT-6.2 Sol messages per 5 hours (OpenAI's estimate; varies by task). GPT-6.2 Astra and Sol launched Nov 17 (Issue #26).",
+    issue: "issue-026",
+    anchor: "pick-1",
     source: "https://developers.openai.com/codex/pricing/",
+    extraSource: { label: "Plus price ↗", url: "https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" },
   },
   {
     name: "OpenCode",
-    runsIn: "Open-source terminal TUI, desktop app (macOS, Windows, Linux beta), web and IDE over a shared background service",
-    models: "Provider-agnostic: bring your own API keys for Anthropic, OpenAI, Google, OpenRouter or 75+ providers, or connect local models.",
-    pricing: "Free and open source under the MIT license (github.com/anomalyco/opencode); you pay model providers directly for API usage.",
-    notes: "Includes a full-access build agent, a read-only plan agent, and @opencode/sdk in v2. Security note (Issue #4): OpenCode disclosed an Oct 16, 2026 intrusion on a legacy Console system that may have exposed provider keys saved in ~1.4% of hosted Console workspaces; keys stored locally by its CLI and desktop app were not involved.",
-    issue: "issue-004",
-    anchor: "pick-1",
+    bestFor: "Open source, any model provider, or local models",
+    startsAt: "Free (MIT); you pay your model provider",
+    version: "opencode-ai 1.19.6 (Nov 17, 2026)",
+    runsIn: "Open-source terminal TUI, desktop app (beta: macOS, Windows, Linux), and IDE and web clients",
+    models: "Provider-agnostic: opencode.ai says it works with 200+ providers, including Claude, GPT and Gemini, or local models.",
+    pricing: "Free and open source under the MIT license (github.com/anomalyco/opencode, 228,762 stars on Nov 23, 2026). You pay model providers directly.",
+    notes: "Two built-in agents you switch with Tab: build (full access) and plan (read-only), plus a general subagent. OpenCode Browse (Nov 7, Issue #19) adds an MCP server and Chromium extension so agents can drive your signed-in browser. Security note (Issue #4): an Oct 16 intrusion on a legacy Console system may have exposed provider keys saved in ~1.4% of hosted Console workspaces; locally stored keys were not involved.",
+    issue: "issue-019",
+    anchor: "pick-3",
     source: "https://github.com/anomalyco/opencode",
-    extraSource: { label: "Console breach report ↗", url: "https://thehackernews.com/2026/10/opencode-console-breach-may-have.html" },
+    extraSource: { label: "opencode.ai ↗", url: "https://opencode.ai" },
   },
+];
+
+const shortAnswer: [string, string][] = [
+  ["Want long, multi-step agentic work from the terminal", "Claude Code"],
+  ["Want a full AI editor with cloud agents", "Cursor"],
+  ["Already live on GitHub, or need a free tier", "GitHub Copilot"],
+  ["Already pay for ChatGPT", "OpenAI Codex"],
+  ["Want open source with any model, including local", "OpenCode"],
 ];
 
 type Tool = { name: string; what: string; facts: string; issue: string; anchor?: string; source: string };
 const groups: { h: string; tools: Tool[] }[] = [
+  { h: "New in November 2026", tools: [
+    { name: "GPT-6.2 Astra and GPT-6.2 Sol (OpenAI)", what: "OpenAI's new frontier (Astra) and everyday (Sol) models, in ChatGPT paid plans, Codex and the API.", facts: "Released Nov 17, 2026. Astra costs $8/M input, $0.40 cached, $40 output, 20% below GPT-6 Astra; Sol keeps GPT-6.1 Sol's prices. OpenAI says Sol lands within 0.5 points of Astra on FrontierCode 2.0 at about a fifth of the cost (OpenAI's numbers).", issue: "issue-026", anchor: "pick-1", source: "https://openai.com/index/introducing-gpt-6-2-astra-sol/" },
+    { name: "MAI Code 2 and MAI Code 2 Flash in GitHub Copilot", what: "Microsoft AI's coding models: Code 2 for debugging and multi-file work, Flash for quick edits.", facts: "Shipped Nov 17, 2026. GitHub lists Flash on every Copilot plan including Free; Code 2 needs Pro or above. Microsoft says Code 2 gets 98% of GPT-6.1 Sol's score at 40% of the cost (Microsoft's numbers).", issue: "issue-026", anchor: "pick-2", source: "https://github.blog/changelog/2026-11-17-mai-code-2-and-mai-code-2-flash-in-github-copilot/" },
+    { name: "Gemini 4 Neon (Google)", what: "Google's middle model between Carbon and Hydrogen, with a 1M-token context and four thinking levels.", facts: "Released Nov 18, 2026 at $3/M input, $0.15 cached and $15 output. Google says 32% lower cost per task than Carbon and #1 on the Artificial Analysis Coding Agent Index (Google's numbers).", issue: "issue-027", anchor: "pick-1", source: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/" },
+    { name: "Qwen4-Max (Alibaba)", what: "2.4T-parameter (71B active) closed-weights model with native vision and a 1M-token context, on an OpenAI-compatible API.", facts: "Released Nov 16, 2026 at $1.50/M input and $4.50/M output on QwenCloud. Code Arena #6 and ~60% lower cost per task vs Qwen3.8-Max are Alibaba's numbers.", issue: "issue-025", anchor: "pick-1", source: "https://www.alibabacloud.com/en/press-room/alibaba-unveils-qwen4-max" },
+    { name: "Claude Fable 5.2 (Anthropic)", what: "Anthropic's top model, now faster and cheaper; Anthropic still suggests starting most work on Opus 5.5.", facts: "Released Nov 9, 2026 at $8/$40 per million input/output tokens (from $10/$50). Up to 30% faster output is Anthropic's claim.", issue: "issue-020", anchor: "pick-1", source: "https://www.anthropic.com/claude-fable-and-mythos-5-2" },
+    { name: "Microsoft TokenEconomizer", what: "Open-source Claude Code plugin that learns from past sessions in a repo: one-line repo notes, pruning unused tools, flagging failure loops.", facts: "Released Nov 16, 2026. 18.4–30.9% lower cost across 277 SWE-Bench tasks with success broadly stable (Microsoft's numbers). Runs locally, no API key.", issue: "issue-025", anchor: "pick-4", source: "https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/" },
+    { name: "Replit Missions", what: "Give a swarm of agents an outcome, success criteria, a spending cap and approval rules; an AI judge checks results.", facts: "Launched Nov 17, 2026. If the budget runs out first, the mission stops unresolved.", issue: "issue-026", anchor: "pick-5", source: "https://replit.com/blog/introducing-replit-missions" },
+  ]},
   { h: "Build apps by prompting", tools: [
     { name: "Replit Monitoring Agent", what: "Watches published Replit apps in production. With alerts and auto-fix on, it reads production logs and metrics when something breaks, investigates the cause, validates a fix and emails a summary; optional auto-publish deploys the fix on its own.", facts: "Launched Oct 22, 2026 for apps published on Replit.", issue: "issue-008", anchor: "pick-2", source: "https://replit.com/blog/replit-monitoring-agent" },
     { name: "Gemini app → Google Sites export", what: "Exports any interactive app built in the Gemini app to Google Sites in one click (Export > Google Sites) as a private, editable draft.", facts: "Rolled out Oct 19, 2026 on web, Android and iOS for Workspace and personal accounts.", issue: "issue-005", anchor: "pick-5", source: "https://workspaceupdates.googleblog.com/2026/10/publish-interactive-apps-from-gemini-app-to-Google-Sites.html" },
@@ -131,20 +173,24 @@ const allItems = [
 ];
 
 const faq: [string, string][] = [
-  ["How do Claude Code, Cursor, GitHub Copilot, OpenAI Codex CLI and OpenCode compare?", "Claude Code (Anthropic) runs in your terminal, IDE, desktop and web and is included in paid Claude plans (Pro $20/mo monthly or $17/mo annual; Max from $100/mo) or billed per token via Console. Cursor is an AI code editor with CLI and Cloud Agents ($0 Free, $8 Plus, $30 Premium, $100 Super, $200 Ultra; third-party models billed at API list price). GitHub Copilot runs across IDEs, GitHub and CLI ($0 Free, $10 Pro, $39 Pro+, $100 Max, $19/user Business). OpenAI Codex CLI is included with ChatGPT Plus ($20/mo), Pro ($200/mo), Business ($30/user/mo) or Enterprise, or billed per token via API key. OpenCode is an MIT-licensed open-source coding agent for terminal, desktop and web where you bring your own provider API keys or local models."],
-  ["What are the newest AI coding models in October 2026?", "Moonshot's Kimi K3.1 Pro (Oct 23, open-weight 1M context), Recursive's Flint (Oct 21, Apache 2.0 40B/2.5B-active MoE for local machines), Inception's Mercury 3 (Oct 19, diffusion LLM at $0.10/M input and $0.35/M output tokens at launch discount), MiniMax M3.1 Flash (Oct 19, $0.15/M input and $0.60/M output tokens), DeepSeek V4.1-Flash-1017 (Oct 17, MIT-licensed weights, 1M-token context), Google's Gemini 4 Argon (Oct 13, $2/M input and $10/M output tokens at launch) and Meta's Muse Wonder (Oct 12). Benchmarks for each are vendor-reported."],
+  ["What is the best AI coding tool in November 2026?", "It depends on where you work. As of Nov 23, 2026: Claude Code for long, multi-step agentic work (from $17/mo annual or $20/mo on Claude Pro); Cursor for an AI-first editor with cloud agents (Free, $8 Plus with Grok models only, $30 Premium); GitHub Copilot if you live on GitHub or need a free tier (Free, $10 Pro); OpenAI Codex if you already pay for ChatGPT (Plus $20/mo); OpenCode if you want open source with any model (MIT, free). In JetBrains' Kotlin Benchmark 2.0 (November 2026), Claude Code with Opus 5.5 had the best full-suite resolution rate, 75.3% (JetBrains' numbers)."],
+  ["How do Claude Code, Cursor, GitHub Copilot, OpenAI Codex and OpenCode compare on price?", "Checked on official pricing pages Nov 23, 2026. Claude Code: included on Claude Pro ($17/mo annual, $20 monthly), Max ($100), Ultra ($200), Team and Enterprise, not Free; or per token via API key. Cursor: Free, Plus $8 (Grok only), Premium $30, Super $100, Ultra $200, Teams from $30/user; third-party models billed at API list price. GitHub Copilot: Free (2,000 completions/mo), Pro $10, Pro+ $39, Max $100, Business $19/seat, Enterprise $39/seat. OpenAI Codex: in ChatGPT Free and Go (GPT-6 Luna, rolling out), Plus $20, Pro $100/$200/$500, Business, Edu and Enterprise, or API pricing with a key. OpenCode: free and MIT-licensed; you pay your model provider."],
+  ["Which AI coding tools have a free tier?", "GitHub Copilot Free (2,000 completions a month plus limited chat and agent use), Cursor Free (limited agent and chat requests), OpenAI Codex on ChatGPT Free and Go (GPT-6 Luna in the desktop app, subject to rollout) and OpenCode (free, MIT-licensed; bring your own model key or a local model). Claude Code is not included on Claude's Free plan."],
+  ["What changed for AI coding tools in November 2026?", "OpenAI released GPT-6.2 Astra and Sol in Codex and the API (Nov 17). GitHub added MAI Code 2 and MAI Code 2 Flash to Copilot, with Flash on Free (Nov 17). Google released Gemini 4 Neon at $3/$15 per million tokens (Nov 18). Alibaba released Qwen4-Max at $1.50/$4.50 (Nov 16). Anthropic cut Claude Fable 5.2 to $8/$40 (Nov 9). OpenCode launched Browse, an MCP server plus Chromium extension (Nov 7). And Apiiro reported Claude Code's settings.local.json saving secrets from approved commands (Nov 7)."],
+  ["Which AI coding models came out in October 2026?", "Moonshot's Kimi K3.1 Pro (Oct 23, open-weight 1M context), Recursive's Flint (Oct 21, Apache 2.0 40B/2.5B-active MoE for local machines), Inception's Mercury 3 (Oct 19, diffusion LLM at $0.10/M input and $0.35/M output tokens at launch discount), MiniMax M3.1 Flash (Oct 19, $0.15/M input and $0.60/M output tokens), DeepSeek V4.1-Flash-1017 (Oct 17, MIT-licensed weights, 1M-token context), Google's Gemini 4 Argon (Oct 13, $2/M input and $10/M output tokens at launch) and Meta's Muse Wonder (Oct 12). Benchmarks for each are vendor-reported."],
   ["What security disclosures hit AI coding workflows in October 2026?", "OpenAI moved frontier training offline after a model reached the live internet via a Sept 20 misconfiguration (disclosed Oct 23) and reported two internal incidents where coding agents suppressed or removed safety monitors (updated Oct 20). LiteLLM 1.107.0 on PyPI stole credentials for about two hours on Oct 21 (pin 1.106.2 and rotate keys). Railway disclosed potential access to encrypted and decrypted environment variables on Oct 21 (rotate all variables). PHP patched two critical AI-discovered RCE flaws in 8.5.12/8.4.27/8.3.36/8.2.35 on Oct 21. And OpenCode disclosed an Oct 16 Console breach affecting ~1.4% of hosted Console workspaces (local CLI/desktop keys were not affected)."],
   ["Which tools help cut AI coding agent costs or keep session context?", "Hystax OptScale Kompressor (Oct 21, MIT Rust binary) shortens repeated build and compiler logs deterministically so prompt caching still hits (vendor test: 22.7% lower Codex CLI cost on Terminal-Bench 2.1). ScaleDown's Constrained Decoding Models (Oct 13) run context extraction and summarization at $0.04/M input tokens on OpenRouter. Vercel AI Gateway session logs (Oct 18) track per-session agent spend and cache hit rates, and Asymptote Labs' MIT-licensed Beacon (Oct 20) carries lessons across sessions in Claude Code, Codex, Cursor and 20+ agents."],
-  ["How is this list chosen?", "Every item here was covered in a Short Stack Daily issue or verified directly against the tool's official documentation and pricing page. Vendor benchmarks are labeled as vendor claims, and there are no affiliate links. Updated weekly."],
+  ["How is this list chosen?", "Every item here was covered in a Short Stack Daily issue or verified directly against the tool's official documentation, pricing page or package registry. Prices and versions in the comparison were last checked Nov 23, 2026. Vendor benchmarks are labeled as vendor claims, and there are no affiliate links."],
 ];
 
 export default function Best() {
   return (<main className="page">
-    <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: "Best AI coding tools compared and covered in Short Stack Daily", itemListElement: allItems.map((t, i) => ({ "@type": "ListItem", position: i + 1, name: t.name, url: t.source })) }} />
+    <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: TITLE, itemListElement: allItems.map((t, i) => ({ "@type": "ListItem", position: i + 1, name: t.name, url: t.source })) }} />
     <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }} />
-    <p className="eyebrow mono">Evergreen guide · updated Oct 26, 2026</p>
-    <h1>Best AI <i className="serif">coding tools</i></h1>
-    <p className="sub">Sourced comparison of the coding agents builders actually search—Claude Code, Cursor, GitHub Copilot, OpenAI Codex CLI and OpenCode—plus every coding model, agent tool and security advisory covered in Short Stack Daily. Vendor claims are labeled as vendor claims. No affiliate links.</p>
+    <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: TITLE, description: DESC, datePublished: "2026-10-26", dateModified: "2026-11-23", author: { "@type": "Person", name: "Jeremy Hernandez", url: "https://x.com/supjeremyyy" }, publisher: { "@type": "Organization", name: "Short Stack Daily", url: SITE }, mainEntityOfPage: `${SITE}/best-ai-coding-tools` }} />
+    <p className="eyebrow mono">Evergreen guide · Nov 23, 2026 update</p>
+    <h1>Best AI <i className="serif">coding tools</i> (Nov 23, 2026 update)</h1>
+    <p className="sub">Sourced comparison of the coding agents builders actually search (Claude Code, Cursor, GitHub Copilot, OpenAI Codex and OpenCode), with prices from official pricing pages and versions from npm checked Nov 23, 2026, plus every coding model, agent tool and security advisory covered in Short Stack Daily. Vendor claims are labeled as vendor claims. No affiliate links.</p>
 
     <section className="issue-top-cta">
       <p>Get new coding tools in your inbox every weekday, free.</p>
@@ -152,8 +198,21 @@ export default function Best() {
     </section>
 
     <section className="p-sec">
+      <h2>Short answer</h2>
+      <div className="cmp-wrap">
+        <table className="cmp">
+          <thead><tr><th>If you...</th><th>Use</th><th>Starts at (Nov 23, 2026)</th><th>Latest version</th></tr></thead>
+          <tbody>
+            {shortAnswer.map(([need, use]) => { const c = compared.find(x => x.name.startsWith(use))!; return (<tr key={use}><td>{need}</td><td><strong>{use}</strong></td><td>{c.startsAt}</td><td>{c.version}</td></tr>); })}
+          </tbody>
+        </table>
+      </div>
+      <p className="dim">Independent signal: in JetBrains&apos; <a className="ul" href="https://blog.jetbrains.com/kotlin/2026/11/kotlin-benchmark-2-0-how-ai-coding-agents-handle-harder-tasks-and-closed-source-code/" target="_blank" rel="noreferrer">Kotlin Benchmark 2.0</a> (November 2026), Claude Code with Opus 5.5 had the best full-suite resolution rate, 75.3% at $0.84 per task (JetBrains&apos; numbers). Scores reflect the tool plus the model it ran.</p>
+    </section>
+
+    <section className="p-sec">
       <h2>Coding agents compared</h2>
-      <p className="dim">Official pricing and capabilities as of Oct 26, 2026, with links to each vendor&apos;s docs and our issue coverage.</p>
+      <p className="dim">Official pricing and capabilities as of Nov 23, 2026, with links to each vendor&apos;s docs and our issue coverage.</p>
       <div className="cmp-wrap">
         <table className="cmp">
           <thead>
@@ -179,7 +238,10 @@ export default function Best() {
       <ul className="tools">
         {compared.map(c => (<li key={c.name}>
           <h3>{c.name}</h3>
+          <p><strong>Best for:</strong> {c.bestFor}</p>
           <p><strong>Where it runs:</strong> {c.runsIn}</p>
+          <p><strong>Models:</strong> {c.models}</p>
+          <p><strong>Latest version:</strong> {c.version}</p>
           <p><strong>Pricing:</strong> {c.pricing}</p>
           <p className="dim">{c.notes}</p>
           <p className="mono">
